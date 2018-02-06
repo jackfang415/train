@@ -1,0 +1,24 @@
+body {
+	
+	background-image: url("https://img00.deviantart.net/0237/i/2017/303/5/8/final_fantasy_viii___doomtrain_by_soulstryder210-dbs91d9.jpg");
+			background size:cover;
+}
+
+#title {
+
+	background-color:orange;
+	text-align:center;
+}
+
+.form-group {
+	color:orange;
+}
+
+#trainHeading {
+	background-color:orange;
+	font-size:20px;
+}
+
+#train-table {
+	background-color:orange;
+}

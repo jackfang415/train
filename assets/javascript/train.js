@@ -27,7 +27,7 @@ $("#addTrain").on("click", function(event) {
 	time = $("#trainTime").val().trim();
 	frequency = $("#frequency").val().trim();
 
-	var time = moment(moment(time, "hh:mm A").subtract(1, "years"),"hh:mm").format("hh:mm A");
+	// var time = moment(moment(time, "hh:mm A").subtract(1, "years"),"hh:mm").format("hh:mm A");
 
 	console.log(train);
 	console.log(destination);
@@ -44,18 +44,22 @@ $("#addTrain").on("click", function(event) {
 });
 
 database.ref().on("child_added", function(snapshot) {
-	
+	console.log(minutesAway);
 	var train = snapshot.val().train;
 	var destination = snapshot.val().destination;
 	var time = snapshot.val().time;
 	var frequency = snapshot.val().frequency;
 
-	var diff = moment().diff(moment(frequency, "hh:mm A"), "m");
-	var modolo = diff % frequency;
-	var waiting = frequency - modolo;
-	var arrival = moment().add(waiting, "m");
+	var diff = moment().diff(moment(time, "hh:mm A"), "m");
+	var modulo = diff % frequency;
+	var waiting = time - modulo;
+	var minutesAway = null
+	var nextArrival = null
+	var minutesAway = frequency - modulo
+	// var arrival = moment().add(waiting, "m");
 
-	var nextArrival = moment(arrival).format("hh:mm A")
+	nextArrival = moment().add(minutesAway, "m");
+	var actualArrival = moment(nextArrival).format("hh:mm A" );
 
 	var table = $("#train-table");
 
@@ -64,8 +68,8 @@ database.ref().on("child_added", function(snapshot) {
 		<td>${train}</td>
 		<td>${destination}</td>
 		<td>${frequency}</td>
-		<td>${arrival}</td>
-		<td>${waiting}</td>
+		<td>${actualArrival}</td>
+		<td>${minutesAway}</td>
 		</tr>`);
 
 })
